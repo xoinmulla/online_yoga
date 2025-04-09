@@ -1,0 +1,47 @@
+{% extends 'yoga/base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #4c8f9c;
+    }
+</style>
+<div class="container py-5">
+  <!-- Page Title and Introduction -->
+  <div class="text-center mb-5">
+    <h1 class="display-4 text-white">Available Yoga Classes</h1>
+    <p class="lead text-white">
+      Discover the perfect journey to wellness with our diverse yoga sessions designed for your mind, body, and soul.
+    </p>
+  </div>
+  
+  <div class="row">
+    {% for class in classes %}
+    <div class="col-md-4 d-flex align-items-stretch">
+      <div class="card mb-4 shadow-sm">
+        {% comment %}
+          If a class image exists, display it; otherwise, show a placeholder.
+        {% endcomment %}
+        {% if class.image %}
+          <img src="{{ class.image.url }}" class="card-img-top" alt="{{ class.title }}">
+        {% else %}
+          <img src="data:image/jpeg;base64,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" class="card-img-top" alt="Yoga Class">
+        {% endif %}
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">{{ class.title }}</h5>
+        </div>
+        <div class="card-body bg-light">
+          <p class="card-text">{{ class.description|default:"No description provided." }}</p>
+          <ul class="list-unstyled">
+            <li><strong>Schedule:</strong> {{ class.schedule }}</li>
+            <li><strong>Instructor:</strong> {{ class.instructor.name }}</li>
+          </ul>
+        </div>
+        <div class="card-footer bg-white border-top-0">
+            </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
